@@ -1,6 +1,6 @@
 # Adafruit Feather M0 Basic
 
-This is target Arduino Code for the Adafruit M0 Board for use with the PicoEMP tool from NewAE..
+This is target Arduino Code for the Adafruit M0 Board for use with the [PicoEMP](https://github.com/newaetech/chipshouter-picoemp) tool.
 
 [Adafruit M0 Basic Proto Board](https://learn.adafruit.com/adafruit-feather-m0-basic-proto/overview)
 

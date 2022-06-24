@@ -1,5 +1,5 @@
 
-This is a collection of target code that can be used with the PicoEMP tools. This is test code that can be used with target boards.
+This is a collection of target code that can be used with the [PicoEMP](https://github.com/newaetech/chipshouter-picoemp) tool. This is test code that can be used with target boards.
 
 Adafruit M0 - Code for that board.
 
