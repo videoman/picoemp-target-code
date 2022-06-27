@@ -14,6 +14,13 @@ If you glitch it right, it will give you the output on the serial, and blink the
 
 Have fun! 
 
+## Location of the glitch
+
+![Location Photo 1](M0-glitch-location-1.jpeg)
+![Location Photo 2](M0-glitch-location-2.jpeg)
+![Location Photo 3](M0-glitch-location-3.jpeg)
+
+
 ## License
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 International License][cc-by-sa].
