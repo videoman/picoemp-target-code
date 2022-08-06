@@ -32,9 +32,9 @@ void setup() {
 
 void loop()
 {
-#define RUN_CNT 5000
-#define OUTER_LOOP_CNT 1000
-#define INNER_LOOP_CNT 1000
+#define RUN_CNT 500
+#define OUTER_LOOP_CNT 900
+#define INNER_LOOP_CNT 900
 
   //Serial.print("Booting into for loop...\n");
   //Serial.print("Booting into for loop...\n");
@@ -94,10 +94,10 @@ void loop()
       {
         digitalWrite(LED_BUILTIN, HIGH);
         digitalWrite(GREEN_LED, HIGH);
-        delay(400);
+        delay(200);
         digitalWrite(LED_BUILTIN, LOW);
         digitalWrite(GREEN_LED, LOW);
-        delay(400);
+        delay(200);
       }
       run_cnt = 0;
       digitalWrite(GLITCH_SIG, LOW);
