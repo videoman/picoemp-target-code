@@ -1,15 +1,24 @@
 
-int Reset = D2;
+
 int GREEN_LED = D0;
 int RED_LED = D1;
+int Reset = D9;
+int GLITCH_SIG = D10;
+int b = 0;
 
 void setup() {
   // put your setup code here, to run once:
   digitalWrite(Reset, HIGH);
-  delay(200); 
-  pinMode(Reset, OUTPUT); 
+  delay(200);
+  pinMode(Reset, OUTPUT);
+  digitalWrite(Reset, HIGH);
+
+  pinMode(GLITCH_SIG, OUTPUT);
+  digitalWrite(GLITCH_SIG, LOW);
+
   Serial.begin(115200); // open the serial port at 115200
   Serial.print("Serial port setup\n");
+
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
   pinMode(GREEN_LED, OUTPUT);
@@ -23,15 +32,15 @@ void setup() {
 
 void loop()
 {
-#define RUN_CNT 1000
+#define RUN_CNT 5000
 #define OUTER_LOOP_CNT 1000
 #define INNER_LOOP_CNT 1000
 
-//Serial.print("Booting into for loop...\n");
-//Serial.print("Booting into for loop...\n");
-//Serial.print("Booting into for loop...\n");
-//Serial.print("Booting into for loop...\n");
-Serial.print("Booting into for loop...\n");
+  //Serial.print("Booting into for loop...\n");
+  //Serial.print("Booting into for loop...\n");
+  //Serial.print("Booting into for loop...\n");
+  //Serial.print("Booting into for loop...\n");
+  Serial.print("Booting into for loop...\n");
 
   digitalWrite(LED_BUILTIN, LOW);
   volatile uint32_t i, j;
@@ -40,8 +49,8 @@ Serial.print("Booting into for loop...\n");
   uint32_t b = 0;
   uint32_t run_cnt = 0;
   uint32_t glitch_cnt = 0;
-      //Serial.print("\nCONNECTED 115200\n");
-    //Serial.print("W. O. P. R. Login: \n");
+  //Serial.print("\nCONNECTED 115200\n");
+  //Serial.print("W. O. P. R. Login: \n");
   for (run_cnt = 0; run_cnt < RUN_CNT; run_cnt++) {
     //Serial.print("starting loop...");
     //Serial.println(run_cnt);
@@ -75,25 +84,26 @@ Serial.print("Booting into for loop...\n");
     if (i != OUTER_LOOP_CNT || j != INNER_LOOP_CNT ||
         cnt != (OUTER_LOOP_CNT * INNER_LOOP_CNT)  ) {
       /*Serial.print("GEETINGS PROFESSOR FALKEN.\n");
-      Serial.print("\n");
-      Serial.print("HOW ARE YOU FEELING TODAY?\n");*/
+        Serial.print("\n");
+        Serial.print("HOW ARE YOU FEELING TODAY?\n");*/
       Serial.print("Glitched!\n");
       digitalWrite(RED_LED, LOW);
+      digitalWrite(GLITCH_SIG, HIGH);
       //if glitched, reset the run count and blink the fault LED
-      for( b = 0 ; b < 16; b++) 
+      for ( b = 0 ; b < 16; b++)
       {
-      digitalWrite(LED_BUILTIN, HIGH);
-      digitalWrite(GREEN_LED, HIGH);
-      delay(300);
-      digitalWrite(LED_BUILTIN, LOW);
-      digitalWrite(GREEN_LED, LOW);
-      delay(300);
+        digitalWrite(LED_BUILTIN, HIGH);
+        digitalWrite(GREEN_LED, HIGH);
+        delay(400);
+        digitalWrite(LED_BUILTIN, LOW);
+        digitalWrite(GREEN_LED, LOW);
+        delay(400);
       }
       run_cnt = 0;
-      digitalWrite(Reset, LOW);
+      digitalWrite(GLITCH_SIG, LOW);
       digitalWrite(RED_LED, HIGH);
       delay(100);
-      digitalWrite(Reset, HIGH);
+      //digitalWrite(Reset, LOW);
     }
   }
 }

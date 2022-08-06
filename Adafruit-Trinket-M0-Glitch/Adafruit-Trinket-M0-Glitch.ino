@@ -1,19 +1,25 @@
 
-int Reset = 2;
+
 int GREEN_LED = 0;
 int RED_LED = 1;
+int Reset = 2;
+int GLITCH_SIG = 3;
 
 void setup() {
   // put your setup code here, to run once:
   digitalWrite(Reset, HIGH);
   delay(200);
   pinMode(Reset, OUTPUT);
+  pinMode(GLITCH_SIG, OUTPUT);
+  digitalWrite(GLITCH_SIG, LOW);
   Serial.begin(115200); // open the serial port at 115200
   Serial.print("Serial port setup\n");
+  
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
   pinMode(GREEN_LED, OUTPUT);
   pinMode(RED_LED, OUTPUT);
+  
   digitalWrite(GREEN_LED, HIGH);
   delay(1000);
   digitalWrite(LED_BUILTIN, LOW);
@@ -83,6 +89,7 @@ void loop()
         Serial.print("HOW ARE YOU FEELING TODAY?\n");*/
       Serial.print("Glitched!\n");
       digitalWrite(RED_LED, LOW);
+      digitalWrite(GLITCH_SIG, LOW);
       //if glitched, reset the run count and blink the fault LED
       for ( b = 0 ; b < 16; b++)
       {
@@ -94,10 +101,10 @@ void loop()
         delay(300);
       }
       run_cnt = 0;
-      digitalWrite(Reset, LOW);
+      
       digitalWrite(RED_LED, HIGH);
       delay(100);
-      digitalWrite(Reset, HIGH);
+      digitalWrite(Reset, LOW);
     }
       }
 }
