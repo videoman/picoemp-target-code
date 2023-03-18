@@ -1,9 +1,38 @@
+//#define DEBUG
+//#define DISABLE_BOD12
+//#define DISABLE_BOD33
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200); // open the serial port at 115200
   Serial.print("Serial port setup\n");
   digitalWrite(13, LOW);
+
+#ifdef DISABLE_BOD12
+*((volatile uint32_t *)0x40000838) = 4;    
+#endif
+
+#ifdef DISABLE_BOD33
+SYSCTRL->BOD33.bit.ENABLE = 0;
+#endif
+  
+#ifdef DEBUG
+  delay(5000);
+  Serial.print("DEBUG - Reset Cause:");
+  if(PM->RCAUSE.bit.SYST)
+    Serial.println(" System (software) reset");
+  if(PM->RCAUSE.reg & PM_RCAUSE_WDT)
+    Serial.print(" Watchdog timer reset");
+  if(PM->RCAUSE.bit.EXT)
+    Serial.print(" External (reset button) reset");
+  if(PM->RCAUSE.bit.POR)
+    Serial.print(" Power-on reset");
+  if(PM->RCAUSE.bit.BOD12)
+    Serial.print(" Brown-out detection - 1.2v");
+  if(PM->RCAUSE.bit.BOD33)
+    Serial.print(" Brown-out detection - 3.3v");
+  Serial.println();
+#endif
 }
 
 void loop()
